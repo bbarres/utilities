@@ -1,2 +1,2 @@
 # utilities
-A place where some R code from others is gathered
+A place where some useful R code from others is gathered
