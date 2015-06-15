@@ -1,6 +1,6 @@
 ###############################################################################
 ###############################################################################
-#Script for the analyses of Myzus population sampled on peach trees
+#Script for displaying base colors available in R
 ###############################################################################
 ###############################################################################
 
@@ -17,6 +17,7 @@ SetTextContrastColor <- function(color)
 #Define this array of text contrast colors that correponds to each
 #member of the colors() array.
 TextContrastColor <- unlist( lapply(colors(), SetTextContrastColor) )
+
 
 #Plot matrix of R colors, in index order, 25 per row.
 #This example plots each row of rectangles one at a time.
@@ -63,4 +64,27 @@ for (j in 0:(rowCount-1))
     }
   }
 }
+
+
+#same plot as the first one, but instead of the number, the name of the color
+#is displayed in the rectangle. Plot matrix of R colors, in index order, 
+#25 per row
+colCount <- 25 # number per row
+rowCount <- 27
+plot( c(1,colCount), c(0,rowCount), type="n", ylab="", xlab="",
+      axes=FALSE, ylim=c(rowCount,0))
+title("R colors")
+
+for (j in 0:(rowCount-1))
+{
+  base <- j*colCount
+  remaining <- length(colors()) - base
+  RowSize <- ifelse(remaining < colCount, remaining, colCount)
+  rect((1:RowSize)-0.5,j-0.5, (1:RowSize)+0.5,j+0.5,
+       border="black",
+       col=colors()[base + (1:RowSize)])
+  text((1:RowSize), j, colors()[(base + (1:RowSize))], cex=0.4,
+       col=TextContrastColor[base + (1:RowSize)])
+}
+
 
