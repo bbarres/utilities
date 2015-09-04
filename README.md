@@ -12,7 +12,7 @@ This R code was borrowed to [Earl F. Glynn](http://www.efg2.com/). You can find 
 
 ---
 
-## 'sample_lyon_team.R'
+## `sample_lyon_team.R`
 
 This R code allow me to randomly pick a team for the next available slots of the "Séminiares Scientifiques du Laboratoire ANSES de Lyon". 
 
