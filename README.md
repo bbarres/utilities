@@ -1,5 +1,5 @@
 # utilities
-A place where some useful R code from others is gathered
+This is a place where some miscellaneous and/or some useful R codes borrowed from others are gathered
 
 
 ## `find_colors.R`
