@@ -154,7 +154,7 @@ initial<-sPDF
 initial$index_target<-1:nrow(initial)
 target<-st_geometry(initial)
 mypal<-brewer.pal(12,"Paired")
-
+mypal<-brewer.pal(6,"Dark2")
 
 ##############################################################################/
 #fishnet map####
@@ -190,7 +190,9 @@ Fishnet <- left_join(
 ) %>%
   select(-index_target)
 
-plot(st_geometry(Fishnet), col = mypal, main = "Fishnet")
+plot(st_geometry(Honeycomb),col=mypal)
+plot(st_geometry(Fishnet),col=mypal,bg="lightblue")
+#for a full map 40 x 22.5 with grid set to 50 x 1000
 
 
 ##############################################################################/
@@ -228,8 +230,10 @@ Honeycomb <- left_join(
   select(-index_target)
 
 
-plot(st_geometry(Honeycomb), col = mypal)
+plot(st_geometry(Honeycomb),col=mypal)
 #export to pdf 15 x 10
+plot(st_geometry(Honeycomb),col=mypal,bg="lightblue")
+#for a full map 40 x 22.5 with grid set to 50 x 1000
 
 
 ##############################################################################/
