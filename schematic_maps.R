@@ -9,9 +9,14 @@ library(rnaturalearth)
 library(dplyr)
 library(RColorBrewer)
 
+library(maps)
+library(rworldmap)
+library(rgdal)
+library(rgeos)
+
 
 ##############################################################################/
-#defining a function####
+#loading and formating the data####
 ##############################################################################/
 
 GB <- ne_download(50,
@@ -24,6 +29,7 @@ GB <- ne_download(50,
 
 # Projecting and cleaning
 GB <- st_transform(GB, 3857) %>% select(NAME_EN, ADM0_A3)
+
 initial <- GB
 initial$index_target <- 1:nrow(initial)
 target <- st_geometry(initial)
@@ -121,12 +127,147 @@ stdh_gridpol <- function(sf,
 # End of the function-----
 
 
+##############################################################################/
+#some examples using the function####
+##############################################################################/
+
 fish <- stdh_gridpol(GB, to = "fishnet", gridsize = 50 * 1000)
 puzz <- stdh_gridpol(GB, to = "puzzle", gridsize = 50 * 1000)
 hon <- stdh_gridpol(GB, to = "honeycomb", gridsize = 50 * 1000)
 hex <- stdh_gridpol(GB, to = "hexbin", gridsize = 50 * 1000)
 pix <- stdh_gridpol(GB, to = "pixel", gridsize = 50 * 1000)
 
+
+##############################################################################/
+#some example by me, preparing the dataset####
+##############################################################################/
+
+sPDF<-getMap()[-which(getMap()$ADMIN=="Antarctica"),]
+sPDF<-spTransform(sPDF,CRS=CRS("+proj=robin +ellps=WGS84"))
+sPDF<-sPDF[which(sPDF@data$ADMIN!="Antarctica" & 
+                  gArea(sPDF,byid=TRUE)>20000000000 ),]
+sPDF<-st_as_sf(sPDF) %>% select(SRESmajor,LEVEL)
+sPDF<-sPDF[-c(150),]
+plot(sPDF)
+
+initial<-sPDF
+initial$index_target<-1:nrow(initial)
+target<-st_geometry(initial)
+mypal<-brewer.pal(12,"Paired")
+
+
+##############################################################################/
+#fishnet map####
+##############################################################################/
+
+grid <- st_make_grid(target,
+                     130 * 2500,
+                     # Kms
+                     crs = st_crs(initial),
+                     what = "polygons",
+                     square = TRUE
+)
+
+# To sf
+grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
+
+# We identify the grids that belongs to a entity by assessing the centroid
+cent_grid <- st_centroid(grid)
+cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
+grid_new <- inner_join(grid, st_drop_geometry(cent_merge))
+
+# Fishnet
+Fishgeom <- aggregate(grid_new,
+                      by = list(grid_new$index_target),
+                      FUN = min,
+                      do_union = FALSE
+)
+
+# Lets add the df
+Fishnet <- left_join(
+  Fishgeom %>% select(index_target),
+  st_drop_geometry(initial)
+) %>%
+  select(-index_target)
+
+plot(st_geometry(Fishnet), col = mypal, main = "Fishnet")
+
+
+##############################################################################/
+#hex map####
+##############################################################################/
+
+grid <- st_make_grid(target,
+                     130 * 2500, # Kms
+                     crs = st_crs(initial),
+                     what = "polygons",
+                     square = FALSE # This is the only piece that changes!!!
+)
+# Make sf
+grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
+
+# We identify the grids that belongs to a entity by assessing the centroid
+cent_grid <- st_centroid(grid)
+cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
+grid_new <- inner_join(grid, st_drop_geometry(cent_merge))
+
+# Honeycomb
+Honeygeom <- aggregate(
+  grid_new,
+  by = list(grid_new$index_target),
+  FUN = min,
+  do_union = FALSE
+)
+
+# Lets add the df
+Honeycomb <- left_join(
+  Honeygeom %>%
+    select(index_target),
+  st_drop_geometry(initial)
+) %>%
+  select(-index_target)
+
+
+plot(st_geometry(Honeycomb), col = mypal)
+#export to pdf 15 x 10
+
+
+##############################################################################/
+#pixel map####
+##############################################################################/
+
+grid <- st_make_grid(target,
+                     130 * 2500, # Kms
+                     crs = st_crs(initial),
+                     what = "centers"
+)
+
+# Make sf
+grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
+
+# We identify the grids that belongs to a entity by assessing the centroid
+cent_grid <- st_centroid(grid)
+cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
+grid_new <- st_buffer(cent_merge, 130 * 2500 / 2)
+Pixelgeom <- aggregate(
+  grid_new,
+  by = list(grid_new$index_target),
+  FUN = min,
+  do_union = FALSE
+)
+# Lets add the df
+Pixel <- left_join(
+  Pixelgeom %>%
+    select(index_target),
+  st_drop_geometry(initial)
+) %>%
+  select(-index_target)
+
+plot(st_geometry(Pixel), col = mypal, main = "Pixel")
+
+#the function doesn't work for the data set I use and I can't figure out
+#why
+fish<-stdh_gridpol(sPDF,to="fishnet",gridsize = 10000 * 200000)
 
 ##############################################################################/
 #END
