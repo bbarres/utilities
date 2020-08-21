@@ -278,6 +278,40 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
      mar=c(0,0,0,0),oma=c(0,0,0,0),omd=c(0,0,0,0),mgp=c(0,0,0))
 dev.off()
 
+#Ingvild
+maface<-readPNG("data/ingvildL.png")
+longImage<-melt(maface)
+rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
+rgbImage$X1<-(-rgbImage$X1)
+voronoiMeans<-kmeans(rgbImage,centers=1000,iter.max=50)
+voronoiColor<-voronoiMeans$centers[voronoiMeans$cluster,3:5]
+with(rgbImage,plot(X2,X1,col=rgb(voronoiColor),asp=1,pch="."))
+
+png(file="output/ingvildL.png")
+plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor), 
+     asp=1,pch=".",ann=F,bty="n",xaxt="n",yaxt="n",
+     usr=c(min(rgbImage$X2),max(rgbImage$X2),
+           min(rgbImage$X1),max(rgbImage$X1)),
+     mar=c(0,0,0,0),oma=c(0,0,0,0),omd=c(0,0,0,0),mgp=c(0,0,0))
+dev.off()
+
+#Mathilda
+maface<-readPNG("data/mathildaI.png")
+longImage<-melt(maface)
+rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
+rgbImage$X1<-(-rgbImage$X1)
+voronoiMeans<-kmeans(rgbImage,centers=1000,iter.max=50)
+voronoiColor<-voronoiMeans$centers[voronoiMeans$cluster,3:5]
+with(rgbImage,plot(X2,X1,col=rgb(voronoiColor),asp=1,pch="."))
+
+png(file="output/mathildaI.png")
+plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor), 
+     asp=1,pch=".",ann=F,bty="n",xaxt="n",yaxt="n",
+     usr=c(min(rgbImage$X2),max(rgbImage$X2),
+           min(rgbImage$X1),max(rgbImage$X1)),
+     mar=c(0,0,0,0),oma=c(0,0,0,0),omd=c(0,0,0,0),mgp=c(0,0,0))
+dev.off()
+
 
 ##############################################################################/
 #END
