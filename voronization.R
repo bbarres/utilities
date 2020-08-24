@@ -24,7 +24,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 
 
 #a less cute example, me
-maface<-readPNG("data/maface.png")
+maface<-readPNG("data/visages/maface.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -41,7 +41,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Annie
-maface<-readPNG("data/annieM.png")
+maface<-readPNG("data/visages/annieM.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -58,7 +58,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Lucile
-maface<-readPNG("data/lucileB.png")
+maface<-readPNG("data/visages/lucileB.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -75,7 +75,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Christine
-maface<-readPNG("data/christineB.png")
+maface<-readPNG("data/visages/christineB.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -92,7 +92,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Claire
-maface<-readPNG("data/claireM.png")
+maface<-readPNG("data/visages/claireM.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -109,7 +109,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Evelyne
-maface<-readPNG("data/evelyneM.png")
+maface<-readPNG("data/visages/evelyneM.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -126,7 +126,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Florent
-maface<-readPNG("data/florentR.png")
+maface<-readPNG("data/visages/florentR.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -143,7 +143,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Laetitia
-maface<-readPNG("data/laetitiaC.png")
+maface<-readPNG("data/visages/laetitiaC.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -160,7 +160,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Michael
-maface<-readPNG("data/michaelLG.png")
+maface<-readPNG("data/visages/michaelLG.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -177,7 +177,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Séverine
-maface<-readPNG("data/severineF.png")
+maface<-readPNG("data/visages/severineF.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -194,7 +194,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Christophe
-maface<-readPNG("data/christopheP.png")
+maface<-readPNG("data/visages/christopheP.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -211,7 +211,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Marie-France
-maface<-readPNG("data/mariefranceG.png")
+maface<-readPNG("data/visages/mariefranceG.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -228,7 +228,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Alizée
-maface<-readPNG("data/alizeeT.png")
+maface<-readPNG("data/visages/alizeeT.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -245,7 +245,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Elorri
-maface<-readPNG("data/elorriS.png")
+maface<-readPNG("data/visages/elorriS.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -262,7 +262,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Isabelle
-maface<-readPNG("data/isabelleP.png")
+maface<-readPNG("data/visages/isabelleP.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -279,7 +279,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Ingvild
-maface<-readPNG("data/ingvildL.png")
+maface<-readPNG("data/visages/ingvildL.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
@@ -296,7 +296,7 @@ plot(rgbImage$X2,rgbImage$X1,col=rgb(voronoiColor),
 dev.off()
 
 #Mathilda
-maface<-readPNG("data/mathildaI.png")
+maface<-readPNG("data/visages/mathildaI.png")
 longImage<-melt(maface)
 rgbImage<-reshape(longImage,timevar="X3",idvar=c("X1","X2"),direction="wide")
 rgbImage$X1<-(-rgbImage$X1)
