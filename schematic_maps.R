@@ -156,6 +156,7 @@ target<-st_geometry(initial)
 mypal<-brewer.pal(12,"Paired")
 mypal<-brewer.pal(6,"Dark2")
 
+
 ##############################################################################/
 #fishnet map####
 ##############################################################################/
@@ -272,6 +273,62 @@ plot(st_geometry(Pixel), col = mypal, main = "Pixel")
 #the function doesn't work for the data set I use and I can't figure out
 #why
 fish<-stdh_gridpol(sPDF,to="fishnet",gridsize = 10000 * 200000)
+
+
+##############################################################################/
+#France map for the website Monitoring section####
+##############################################################################/
+
+#preparing the data
+load("data/cartes/regionsLight.RData")
+sPDF<-spTransform(regionsLight,CRS=CRS("+proj=robin +ellps=WGS84"))
+sPDF<-st_as_sf(sPDF)
+plot(sPDF)
+initial<-sPDF
+initial$index_target<-1:nrow(initial)
+target<-st_geometry(initial)
+mypal<-brewer.pal(12,"Paired")
+mypal<-brewer.pal(6,"Dark2")
+mypal<-brewer.pal(9,"Greys")
+mypal<-brewer.pal(12,"Spectral")
+mypal<-brewer.pal(12,"Set3")
+
+#hex map
+grid <- st_make_grid(target,
+                     60 * 800, # Kms
+                     crs = st_crs(initial),
+                     what = "polygons",
+                     square = FALSE # This is the only piece that changes!!!
+)
+# Make sf
+grid <- st_sf(index = 1:length(lengths(grid)), grid) # Add index
+
+# We identify the grids that belongs to a entity by assessing the centroid
+cent_grid <- st_centroid(grid)
+cent_merge <- st_join(cent_grid, initial["index_target"], left = F)
+grid_new <- inner_join(grid, st_drop_geometry(cent_merge))
+
+# Honeycomb
+Honeygeom <- aggregate(
+  grid_new,
+  by = list(grid_new$index_target),
+  FUN = min,
+  do_union = FALSE
+)
+
+# Lets add the df
+Honeycomb <- left_join(
+  Honeygeom %>%
+    select(index_target),
+  st_drop_geometry(initial)
+) %>%
+  select(-index_target)
+
+png("output/cartoFrance.png",width=800,height=800,
+    units="px",bg="transparent")
+plot(st_geometry(Honeycomb),col=mypal,lwd=3)
+dev.off()
+
 
 ##############################################################################/
 #END
