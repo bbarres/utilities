@@ -291,7 +291,7 @@ mypal<-brewer.pal(12,"Paired")
 mypal<-brewer.pal(6,"Dark2")
 mypal<-brewer.pal(9,"Greys")
 mypal<-brewer.pal(12,"Spectral")
-mypal<-brewer.pal(12,"Set3")
+mypal<-brewer.pal(12,"Set3")[12:1]
 
 #hex map
 grid <- st_make_grid(target,
