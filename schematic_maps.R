@@ -287,6 +287,7 @@ plot(sPDF)
 initial<-sPDF
 initial$index_target<-1:nrow(initial)
 target<-st_geometry(initial)
+mypal<-"white"
 mypal<-brewer.pal(12,"Paired")
 mypal<-brewer.pal(6,"Dark2")
 mypal<-brewer.pal(9,"Greys")
