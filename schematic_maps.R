@@ -326,7 +326,16 @@ Honeycomb <- left_join(
 ) %>%
   select(-index_target)
 
+#map with one color for each region
+mypal<-c(brewer.pal(8,"Set2")[1:7],brewer.pal(9,"Set1")[1:6])
 png("output/cartoFrance.png",width=800,height=800,
+    units="px",bg="transparent")
+plot(st_geometry(Honeycomb),col=mypal,lwd=3)
+dev.off()
+
+#map with all regions in white
+mypal<-"white"
+png("output/cartoFrance_white.png",width=800,height=800,
     units="px",bg="transparent")
 plot(st_geometry(Honeycomb),col=mypal,lwd=3)
 dev.off()
