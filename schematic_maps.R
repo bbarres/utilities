@@ -335,10 +335,8 @@ dev.off()
 
 #map with all regions in white
 mypal<-"white"
-png("output/cartoFrance_white.png",width=800,height=800,
-    units="px",bg="transparent")
 plot(st_geometry(Honeycomb),col=mypal,lwd=3)
-dev.off()
+#export to pdf 8 x 8 inches
 
 
 ##############################################################################/
