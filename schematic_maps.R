@@ -201,7 +201,7 @@ plot(st_geometry(Fishnet),col=mypal,bg="lightblue")
 ##############################################################################/
 
 grid <- st_make_grid(target,
-                     130 * 2500, # Kms
+                     100 * 2000, # Kms
                      crs = st_crs(initial),
                      what = "polygons",
                      square = FALSE # This is the only piece that changes!!!
